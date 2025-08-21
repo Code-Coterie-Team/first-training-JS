@@ -1,41 +1,34 @@
-// لیست خرید
+//first training session of pure JS
+
 let shoppingList = [
   { name: "milk", price: "20" },
   { name: "bread", price: null },
-  { name: "egg", price: 10 },
-  { name: "rice", price: "50" }, 
-  { name: "apple", price: "" },  
-];
+  { name: "egg",price: 10 },];
 
-// تابع مرتبه بالاتر
+//higher-order fn
 const greaterThan = (n) => (m) => m > n;
 
-// تغییر شرط
-let greaterThan30 = greaterThan(30);
+//closure
+let greaterThan15 = greaterThan(15);
 
-// پردازش لیست خرید
+//using map
 let messages = shoppingList.map((item) => {
+    // ?. optional chaining
+    // ?? nullish
   let rawPrice = item?.price ?? 0;
+    //unary operator
   let price = +rawPrice; 
 
-  // تخفیف 20% اگه بالای 50 بود
-  let finalPrice = price > 50 ? price * 0.8 : price;
-
-  if (greaterThan30(price)) {
-    return `${item.name} گرونه (قیمت: ${finalPrice})`;
+  // a true or false result
+  if (greaterThan15(price)) {
+    //template litteral
+    return `${item.name} is expensive (price: ${price})`;
   } else {
     return price > 0
-      ? `${item.name} ارزونه (قیمت: ${finalPrice})`
-      : `${item.name} قیمت معتبری نداره`;
+    // ternary operator
+      ? `${item.name} is affordable (price: ${price})`
+      : `${item.name} has no valid price`;
   }
 });
-
-// چاپ پیام‌ها
+//using forEach
 messages.forEach((msg) => console.log(msg));
-
-// جمع کل قیمت‌ها
-let total = shoppingList
-  .map(item => + (item?.price ?? 0))  
-  .reduce((sum, current) => sum + current, 0);
-
-console.log("جمع کل خرید: " + total);
