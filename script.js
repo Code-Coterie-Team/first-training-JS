@@ -33,11 +33,13 @@ let messages = shoppingList.map((item) => {
 // چاپ پیام‌ها
 messages.forEach((msg) => console.log(msg));
 
-// جمع کل قیمت‌ها
-let total = shoppingList
-  .map(item => + (item?.price ?? 0))  
-  .reduce((sum, current) => sum + current, 0);
+// جمع کل قیمت‌ها با forEach
+let total = 0;
+
+shoppingList.forEach((item) => {
+  let rawPrice = item?.price ?? 0;  // اگه null یا undefined بود، 0 بذاره
+  let price = +rawPrice;            // تبدیل به عدد
+  total += price;                   // جمع کردن
+});
 
 console.log("جمع کل خرید: " + total);
-
-
