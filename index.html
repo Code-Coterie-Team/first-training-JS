@@ -1,11 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <title>Mini JS Project</title>
-</head>
-<body>
+  </head>
+  <body style="background-color: #064">
+    <h2>فرم ورود</h2>
+    <form id="loginForm">
+      <input type="text" id="username" placeholder="نام خود را وارد کنید" />
+      <button type="submit">ثبت</button>
+    </form>
+
+    <p id="welcome"></p>
+    <p id="clock"></p>
+
     <script src="script.js"></script>
-</body>
+
+    <script>
+      const form = document.getElementById("loginForm");
+      const usernameInput = document.getElementById("username");
+      const welcome = document.getElementById("welcome");
+      const clock = document.getElementById("clock");
+
+        //Repeat something after a period time -> ex: getting data
+      setInterval(() => {
+        let now = new Date();
+        clock.textContent =
+          "📅 " + now.toLocaleDateString() + " ⏰ " + now.toLocaleTimeString();
+      }, 1000);
+
+
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        let name = usernameInput.value;
+
+        if (!name) {
+          alert(" نام خود را وارد کنید");
+          return;
+        }
+
+        localStorage.setItem("username", name);
+        // localStorage.getItem()
+
+        sessionStorage.setItem("username", name);
+
+        document.cookie = "username=" + name + "; max-age=8; path=/";
+
+        //do something after a period time -> ex: 
+        setTimeout(() => {
+          welcome.textContent = `🎉 خوش گلدی ${name}!`;
+        }, 3000);
+
+
+      });
+    </script>
+  </body>
 </html>
